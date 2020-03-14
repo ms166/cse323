@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -21,6 +23,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
+
+    ListView listview;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
     @Override
@@ -49,13 +53,17 @@ public class MainActivity extends AppCompatActivity {
         final List<UsageStats> stats=mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_YEARLY, beginCal.getTimeInMillis(), endCal.getTimeInMillis());
 
         // Sort the stats by the last time used
+        SortedMap<Long,UsageStats> mySortedMap = new TreeMap<Long,UsageStats>(Collections.<Long>reverseOrder());
         if(stats != null) {
-            SortedMap<Long,UsageStats> mySortedMap = new TreeMap<Long,UsageStats>(Collections.<Long>reverseOrder());
             for (UsageStats usageStats : stats) {
                 mySortedMap.put(usageStats.getTotalTimeInForeground(), usageStats);
             }
             if(!mySortedMap.isEmpty()) {
 //                topPackageName =  Objects.requireNonNull(mySortedMap.get(mySortedMap.lastKey())).getPackageName();
+
+                String[] nameArray = new String[stats.size()];
+
+                String[] infoArray = new String[stats.size()];
 
                 int count = 0;
                 for(Map.Entry<Long,UsageStats> entry : mySortedMap.entrySet()) {
@@ -63,11 +71,19 @@ public class MainActivity extends AppCompatActivity {
                     UsageStats us = entry.getValue();
                     Long timeInHours = key/(1000 * 3600);
                     Log.d(us.getPackageName(), "value: " + timeInHours);
+
+                    nameArray[count] = us.getPackageName();
+                    infoArray[count] = Long.toString(timeInHours);
+
                     count++;
                     if(count == 20){
                         break;
                     }
                 }
+
+                CustomListAdapter whatever = new CustomListAdapter(this, nameArray, infoArray);
+                listview = (ListView) findViewById(R.id.listviewID);
+                listview.setAdapter(whatever);
             }
             else {
                 Log.d("message3", "stats is empty");
