@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void startApp(){
         assignStats();
-//        Row rows[] = new Row[15];
         ArrayList<Row> rows = new ArrayList<Row>();
         for(Map.Entry<Long, String> entry : stats_4_weeks.entrySet()){
             Long this_week_usage_time = 0L;
@@ -83,9 +82,12 @@ public class MainActivity extends AppCompatActivity {
                 this_week_usage_time = stats_cur_week.get(entry.getValue());
             }
             rows.add(new Row(entry.getValue(), entry.getKey()/(1000 * 60), this_week_usage_time/(1000 * 60)));
+            if(rows.size() == 15){
+                break;
+            }
         }
         double sum = 0;
-        for(int i = 0; i < 15; ++i){
+        for(int i = 0; i < rows.size(); ++i){
             sum += rows.get(i).getPercentage_diff();
         }
 

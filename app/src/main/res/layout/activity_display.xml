@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".DisplayActivity">
 
+    <ListView
+        android:id="@+id/listviewID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

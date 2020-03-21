@@ -4,11 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class DisplayActivity extends AppCompatActivity {
-
+    ListView listview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,5 +29,8 @@ public class DisplayActivity extends AppCompatActivity {
             Log.d("_ENTRY_", "" + row);
         }
         Log.d("_ENTRY_", "" + sum);
+        CustomListAdapter whatever = new CustomListAdapter(this, rows);
+        listview = (ListView) findViewById(R.id.listviewID);
+        listview.setAdapter(whatever);
     }
 }
