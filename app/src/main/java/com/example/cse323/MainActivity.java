@@ -2,32 +2,28 @@ package com.example.cse323;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,8 +32,11 @@ public class MainActivity extends AppCompatActivity {
     private final int START_WEEK_CUR = 1;
     private final int END_WEEK_CUR = 0;
 
+    private Bundle bundle_for_display_activity;
+
     private Map<Long, String> stats_4_weeks;
     private Map<String, Long> stats_cur_week;
+    private String colours[] = {"#FF0000", "#FF0000", "#FFA500", "#FFA500", "#FFD700", "#FFD700", "#a4c639", "#a4c639", "#00FF00", "#00FF00"};
 
     ListView listview;
 
@@ -122,14 +121,16 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < rows.size(); ++i){
             sum += rows.get(i).getPercentage_diff();
         }
+        int score = getScore(sum/(double)rows.size());
+        this.bundle_for_display_activity = new Bundle();
+        bundle_for_display_activity.putSerializable("rows", rows);
+        bundle_for_display_activity.putDouble("sum", sum);
+        bundle_for_display_activity.putInt("score", score);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("rows", rows);
-        bundle.putDouble("sum", sum);
-        bundle.putInt("score", getScore(sum/(double)rows.size()));
-        Intent intent = new Intent(this, DisplayActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        TextView score_text_view = findViewById(R.id.score_text_view);
+        score_text_view.setText("" + score + " / " + 10);
+        score_text_view.setTextColor(Color.parseColor(this.colours[score - 1]));
+
     }
     private void assignStats(){
         final Map<String, UsageStats> stats1 = getStats(START_WEEK_COMP, END_WEEK_COMP);
@@ -168,5 +169,11 @@ public class MainActivity extends AppCompatActivity {
         Long time_delta = 1000L * 3600 * 10;
         final Map<String, UsageStats> stats = mUsageStatsManager.queryAndAggregateUsageStats(beginCal.getTimeInMillis() + time_delta, endCal.getTimeInMillis());
         return stats;
+    }
+
+    public void launchDisplayActivity(View view) {
+        Intent intent = new Intent(this, DisplayActivity.class);
+        intent.putExtras(this.bundle_for_display_activity);
+        startActivity(intent);
     }
 }
