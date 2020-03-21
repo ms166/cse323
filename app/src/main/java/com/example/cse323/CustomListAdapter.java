@@ -41,9 +41,15 @@ public class CustomListAdapter extends ArrayAdapter {
         cell_0.setText(rows.get(position).getShort_name());
         cell_1.setText("" + rows.get(position).getTime_4_weeks());
         cell_2.setText("" + rows.get(position).getTime_last_week());
-        cell_3.setText(String.format("%.2f", rows.get(position).getPercentage_diff()));
+        if(rows.get(position).getPercentage_diff() >= 0) {
+            cell_3.setText(String.format("+%.2f%%", rows.get(position).getPercentage_diff()));
+        }
+        else {
+            cell_3.setText(String.format("%.2f%%", rows.get(position).getPercentage_diff()));
+        }
 
         return rowView;
+
 
     };
 }
