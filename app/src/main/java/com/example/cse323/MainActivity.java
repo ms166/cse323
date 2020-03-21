@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 this_week_usage_time = stats_cur_week.get(entry.getValue());
             }
             rows[count] = new Row(entry.getValue(), entry.getKey()/(1000 * 60), this_week_usage_time/(1000 * 60));
-            Long time_diff = Math.abs(rows[count].getTime_4_weeks() - rows[count].getTime_last_week());
             count++;
             if(count == 15){
                 break;
@@ -94,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
             sum += rows[i].getPercentage_diff();
         }
         Log.d("_ENTRY_", "" + sum/15);
+
+        Intent intent = new Intent(this, DisplayActivity.class);
+        intent.putExtra("rows", rows);
+        intent.putExtra("sum", sum);
+        startActivity(intent);
     }
     private void assignStats(){
         final Map<String, UsageStats> stats1 = getStats(START_WEEK_COMP, END_WEEK_COMP);
