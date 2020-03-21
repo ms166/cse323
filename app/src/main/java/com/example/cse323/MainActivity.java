@@ -71,7 +71,39 @@ public class MainActivity extends AppCompatActivity {
         }
         return granted;
     }
-
+    private int getScore(double avg){
+        if(avg <= -80){
+            return 1;
+        }
+        if(-80 < avg && avg <= -60){
+            return 2;
+        }
+        if(-60 < avg && avg <= -40){
+            return 3;
+        }
+        if(-40 < avg && avg <= -20){
+            return 4;
+        }
+        if(-20 < avg && avg < 0){
+            return 5;
+        }
+        if(0 <= avg && avg <= 20){
+            return 6;
+        }
+        if(20 < avg && avg <= 40){
+            return 7;
+        }
+        if(40 < avg && avg <= 60){
+            return 8;
+        }
+        if(60 < avg && avg <= 80){
+            return 9;
+        }
+        else {
+            assert(avg > 80);
+            return 10;
+        }
+    }
 
     private void startApp(){
         assignStats();
@@ -94,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("rows", rows);
         bundle.putDouble("sum", sum);
+        bundle.putInt("score", getScore(sum/(double)rows.size()));
         Intent intent = new Intent(this, DisplayActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
