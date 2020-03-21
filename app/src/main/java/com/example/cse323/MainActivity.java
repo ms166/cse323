@@ -2,11 +2,16 @@ package com.example.cse323;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -14,8 +19,10 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -23,6 +30,13 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
+    private final int START_WEEK = 5;
+    private final int END_WEEK = 1;
+    private final int START_WEEK_CUR = 1;
+    private final int END_WEEK_CUR = 0;
+
+    private Map<Long, String> stats_4_weeks;
+    private Map<String, Long> stats_cur_week;
 
     ListView listview;
 
@@ -32,65 +46,73 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-//        startActivity(intent);
+        if(hasPermission()){
+            Log.d("permission", "true");
+            startApp();
+        }
+        else {
+            Log.d("permission", "false");
+            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        }
+    }
+    private boolean hasPermission(){
+        boolean granted = false;
+        AppOpsManager appOps = (AppOpsManager) this.getApplicationContext()
+                .getSystemService(Context.APP_OPS_SERVICE);
+        assert appOps != null;
+        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(), this.getApplicationContext().getPackageName());
 
-        String topPackageName = "NULL";
+        if (mode == AppOpsManager.MODE_DEFAULT) {
+            granted = (this.getApplicationContext().checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            granted = (mode == AppOpsManager.MODE_ALLOWED);
+        }
+        return granted;
+    }
+
+
+    private void startApp(){
+        assignStats();
+        for(Map.Entry<Long, String> entry : stats_4_weeks.entrySet()){
+            Long this_week_usage_time = 0L;
+            if(this.stats_cur_week.containsKey(entry.getValue())){
+                this_week_usage_time = stats_cur_week.get(entry.getValue());
+            }
+            Log.d("entry", "" + entry.getValue() + ": " + entry.getKey()/(1000*60) + ", "  + this_week_usage_time/(1000*60));
+        }
+    }
+    private void assignStats(){
+        final Map<String, UsageStats> stats1 = getStats(START_WEEK, END_WEEK);
+        this.stats_4_weeks = new TreeMap<Long, String>(Collections.<Long>reverseOrder());
+        for(Map.Entry<String, UsageStats> entry: stats1.entrySet()){
+            // divided by 4 to get average time per week
+            this.stats_4_weeks.put(entry.getValue().getTotalTimeInForeground()/4, entry.getKey());
+        }
+
+        final Map<String, UsageStats> stats2 = getStats(START_WEEK_CUR, END_WEEK_CUR);
+        this.stats_cur_week = new HashMap<String, Long>();
+        for(Map.Entry<String, UsageStats> entry : stats2.entrySet()){
+            this.stats_cur_week.put(entry.getKey(), entry.getValue().getTotalTimeInForeground()) ;
+        }
+    }
+
+    private Map<String, UsageStats> getStats(int start_week, int end_week){
         UsageStatsManager mUsageStatsManager = (UsageStatsManager)getSystemService(Context.USAGE_STATS_SERVICE);
 
         assert mUsageStatsManager != null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         Calendar beginCal = Calendar.getInstance();
-        beginCal.set(Calendar.DATE, 1);
-        beginCal.set(Calendar.MONTH, 1);
-        beginCal.set(Calendar.YEAR, 2019);
+        // (week -1) to (week -5)
+        beginCal.add(Calendar.DAY_OF_MONTH, -7 * start_week);
+//        Log.d("date_start", dateFormat.format(beginCal.getTime()));
 
         Calendar endCal = Calendar.getInstance();
-        endCal.set(Calendar.DATE, 1);
-        endCal.set(Calendar.MONTH, 1);
-        endCal.set(Calendar.YEAR, 2020);
+        endCal.add(Calendar.DAY_OF_MONTH, -7 * end_week);
+//        Log.d("date_end", dateFormat.format(endCal.getTime()));
 
-        final List<UsageStats> stats=mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_YEARLY, beginCal.getTimeInMillis(), endCal.getTimeInMillis());
-
-        // Sort the stats by the last time used
-        SortedMap<Long,UsageStats> mySortedMap = new TreeMap<Long,UsageStats>(Collections.<Long>reverseOrder());
-        if(stats != null) {
-            for (UsageStats usageStats : stats) {
-                mySortedMap.put(usageStats.getTotalTimeInForeground(), usageStats);
-            }
-            if(!mySortedMap.isEmpty()) {
-//                topPackageName =  Objects.requireNonNull(mySortedMap.get(mySortedMap.lastKey())).getPackageName();
-
-                String[] nameArray = new String[stats.size()];
-
-                String[] infoArray = new String[stats.size()];
-
-                int count = 0;
-                for(Map.Entry<Long,UsageStats> entry : mySortedMap.entrySet()) {
-                    Long key = entry.getKey();
-                    UsageStats us = entry.getValue();
-                    Long timeInHours = key/(1000 * 3600);
-                    Log.d(us.getPackageName(), "value: " + timeInHours);
-
-                    nameArray[count] = us.getPackageName();
-                    infoArray[count] = Long.toString(timeInHours);
-
-                    count++;
-                    if(count == 20){
-                        break;
-                    }
-                }
-
-                CustomListAdapter whatever = new CustomListAdapter(this, nameArray, infoArray);
-                listview = (ListView) findViewById(R.id.listviewID);
-                listview.setAdapter(whatever);
-            }
-            else {
-                Log.d("message3", "stats is empty");
-            }
-        }
-        else {
-            Log.d("message3", "stats is null");
-        }
+        final Map<String, UsageStats> stats = mUsageStatsManager.queryAndAggregateUsageStats(beginCal.getTimeInMillis(), endCal.getTimeInMillis());
+        return stats;
     }
 }
