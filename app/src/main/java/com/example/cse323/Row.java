@@ -1,6 +1,8 @@
 package com.example.cse323;
 
-public class Row {
+import java.io.Serializable;
+
+public class Row implements Serializable {
     private String name;
     private Long time_4_weeks;
     private Long time_last_week;

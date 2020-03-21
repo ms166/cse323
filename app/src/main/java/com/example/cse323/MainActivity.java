@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -74,29 +75,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void startApp(){
         assignStats();
-        Row rows[] = new Row[15];
-        int count = 0;
+//        Row rows[] = new Row[15];
+        ArrayList<Row> rows = new ArrayList<Row>();
         for(Map.Entry<Long, String> entry : stats_4_weeks.entrySet()){
             Long this_week_usage_time = 0L;
             if(this.stats_cur_week.containsKey(entry.getValue())){
                 this_week_usage_time = stats_cur_week.get(entry.getValue());
             }
-            rows[count] = new Row(entry.getValue(), entry.getKey()/(1000 * 60), this_week_usage_time/(1000 * 60));
-            count++;
-            if(count == 15){
-                break;
-            }
+            rows.add(new Row(entry.getValue(), entry.getKey()/(1000 * 60), this_week_usage_time/(1000 * 60)));
         }
         double sum = 0;
         for(int i = 0; i < 15; ++i){
-            Log.d("_ENTRY_", rows[i].toString());
-            sum += rows[i].getPercentage_diff();
+            sum += rows.get(i).getPercentage_diff();
         }
-        Log.d("_ENTRY_", "" + sum/15);
 
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("rows", rows);
+        bundle.putDouble("sum", sum);
         Intent intent = new Intent(this, DisplayActivity.class);
-        intent.putExtra("rows", rows);
-        intent.putExtra("sum", sum);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
     private void assignStats(){
