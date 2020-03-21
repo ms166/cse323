@@ -30,8 +30,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
-    private final int START_WEEK = 5;
-    private final int END_WEEK = 1;
+    private final int START_WEEK_COMP = 5;
+    private final int END_WEEK_COMP = 1;
     private final int START_WEEK_CUR = 1;
     private final int END_WEEK_CUR = 0;
 
@@ -74,26 +74,41 @@ public class MainActivity extends AppCompatActivity {
 
     private void startApp(){
         assignStats();
+        Row rows[] = new Row[15];
+        int count = 0;
         for(Map.Entry<Long, String> entry : stats_4_weeks.entrySet()){
             Long this_week_usage_time = 0L;
             if(this.stats_cur_week.containsKey(entry.getValue())){
                 this_week_usage_time = stats_cur_week.get(entry.getValue());
             }
-            Log.d("entry", "" + entry.getValue() + ": " + entry.getKey()/(1000*60) + ", "  + this_week_usage_time/(1000*60));
+            rows[count] = new Row(entry.getValue(), entry.getKey()/(1000 * 60), this_week_usage_time/(1000 * 60));
+            Long time_diff = Math.abs(rows[count].getTime_4_weeks() - rows[count].getTime_last_week());
+            count++;
+            if(count == 15){
+                break;
+            }
         }
+        double sum = 0;
+        for(int i = 0; i < 15; ++i){
+            Log.d("_ENTRY_", rows[i].toString());
+            sum += rows[i].getPercentage_diff();
+        }
+        Log.d("_ENTRY_", "" + sum/15);
     }
     private void assignStats(){
-        final Map<String, UsageStats> stats1 = getStats(START_WEEK, END_WEEK);
+        final Map<String, UsageStats> stats1 = getStats(START_WEEK_COMP, END_WEEK_COMP);
         this.stats_4_weeks = new TreeMap<Long, String>(Collections.<Long>reverseOrder());
+        int time_delta_comp = START_WEEK_COMP - END_WEEK_COMP;
+        int time_delta_cur = START_WEEK_CUR - END_WEEK_CUR;
         for(Map.Entry<String, UsageStats> entry: stats1.entrySet()){
             // divided by 4 to get average time per week
-            this.stats_4_weeks.put(entry.getValue().getTotalTimeInForeground()/4, entry.getKey());
+            this.stats_4_weeks.put(entry.getValue().getTotalTimeInForeground() / time_delta_comp, entry.getKey());
         }
 
         final Map<String, UsageStats> stats2 = getStats(START_WEEK_CUR, END_WEEK_CUR);
         this.stats_cur_week = new HashMap<String, Long>();
         for(Map.Entry<String, UsageStats> entry : stats2.entrySet()){
-            this.stats_cur_week.put(entry.getKey(), entry.getValue().getTotalTimeInForeground()) ;
+            this.stats_cur_week.put(entry.getKey(), entry.getValue().getTotalTimeInForeground() / time_delta_cur) ;
         }
     }
 
