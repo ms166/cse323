@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
         this.stats_4_weeks = new TreeMap<Long, String>(Collections.<Long>reverseOrder());
         int time_delta_comp = START_WEEK_COMP - END_WEEK_COMP;
         int time_delta_cur = START_WEEK_CUR - END_WEEK_CUR;
+//        Log.d("time_delta", "" + time_delta_comp);
+//        Log.d("time_delta", "" + time_delta_cur);
         for(Map.Entry<String, UsageStats> entry: stats1.entrySet()){
             // divided by 4 to get average time per week
             this.stats_4_weeks.put(entry.getValue().getTotalTimeInForeground() / time_delta_comp, entry.getKey());
@@ -155,15 +157,16 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         Calendar beginCal = Calendar.getInstance();
-        // (week -1) to (week -5)
         beginCal.add(Calendar.DAY_OF_MONTH, -7 * start_week);
 //        Log.d("date_start", dateFormat.format(beginCal.getTime()));
 
         Calendar endCal = Calendar.getInstance();
         endCal.add(Calendar.DAY_OF_MONTH, -7 * end_week);
 //        Log.d("date_end", dateFormat.format(endCal.getTime()));
+//        Log.d("time_diff","" + (endCal.getTimeInMillis() - beginCal.getTimeInMillis()) / (double)(1000 * 3600));
 
-        final Map<String, UsageStats> stats = mUsageStatsManager.queryAndAggregateUsageStats(beginCal.getTimeInMillis(), endCal.getTimeInMillis());
+        Long time_delta = 1000L * 3600 * 10;
+        final Map<String, UsageStats> stats = mUsageStatsManager.queryAndAggregateUsageStats(beginCal.getTimeInMillis() + time_delta, endCal.getTimeInMillis());
         return stats;
     }
 }
