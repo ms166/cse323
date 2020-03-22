@@ -17,6 +17,10 @@ public class DisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+
+        // adds back button to go back to parent activit
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Bundle bundle = this.getIntent().getExtras();
         ArrayList<Row> rows;
         int score;
