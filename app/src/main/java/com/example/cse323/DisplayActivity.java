@@ -42,7 +42,7 @@ public class DisplayActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listviewID);
         listview.setAdapter(whatever);
 
-        double avg = sum/(double)15;
+        double avg = sum/(double)rows.size();
         explanation = findViewById(R.id.explanation);
         avg_pd = findViewById(R.id.avg_pd);
         String average_percentage_diff;

@@ -112,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
             if(this.stats_cur_week.containsKey(entry.getValue())){
                 this_week_usage_time = stats_cur_week.get(entry.getValue());
             }
-            rows.add(new Row(entry.getValue(), entry.getKey()/(1000 * 60), this_week_usage_time/(1000 * 60)));
-            if(rows.size() == 15){
+            rows.add(new Row(entry.getValue(), entry.getKey(), this_week_usage_time));
+            if(rows.size() == 10 || entry.getKey() == 0){
                 break;
             }
         }
@@ -141,13 +141,17 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("time_delta", "" + time_delta_cur);
         for(Map.Entry<String, UsageStats> entry: stats1.entrySet()){
             // divided by 4 to get average time per week
-            this.stats_4_weeks.put(entry.getValue().getTotalTimeInForeground() / time_delta_comp, entry.getKey());
+            Long time = entry.getValue().getTotalTimeInForeground() / time_delta_comp;
+            time = fixTime(time);
+            this.stats_4_weeks.put(time, entry.getKey());
         }
 
         final Map<String, UsageStats> stats2 = getStats(START_WEEK_CUR, END_WEEK_CUR);
         this.stats_cur_week = new HashMap<String, Long>();
         for(Map.Entry<String, UsageStats> entry : stats2.entrySet()){
-            this.stats_cur_week.put(entry.getKey(), entry.getValue().getTotalTimeInForeground() / time_delta_cur) ;
+            Long time = entry.getValue().getTotalTimeInForeground() / time_delta_cur;
+            time = fixTime(time);
+            this.stats_cur_week.put(entry.getKey(), time) ;
         }
     }
 
@@ -175,5 +179,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DisplayActivity.class);
         intent.putExtras(this.bundle_for_display_activity);
         startActivity(intent);
+    }
+    private Long fixTime(Long time){
+        time /= (1000 * 60);
+        while (time >= (24L * 7 * 60)) {
+            time /= 8;
+            time *= 7;
+        }
+        return time;
     }
 }
