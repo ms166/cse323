@@ -58,10 +58,10 @@ public class DisplayActivity extends AppCompatActivity {
     }
     private String getExplanationText(int score){
         if(score == 1 || score == 2){
-            return "The data shows that your app usage is quite a bit less than usual indicating that you are very unhappy.";
+            return "The data shows that your app usage is much less than usual indicating that you are very unhappy.";
         }
         else if(score == 3 || score == 4){
-            return "The data shows that your app usage is less than usual indicating that you are moderately unhappy.";
+            return "The data shows that your app usage is less than usual indicating that you are quite unhappy.";
         }
         else if(score == 5){
             return "The data shows that your app usage is slightly less than usual indicating that you are somewhat unhappy.";
@@ -70,10 +70,10 @@ public class DisplayActivity extends AppCompatActivity {
             return "The data shows that your app usage is slightly more than usual indicating that you are somewhat happy.";
         }
         else if(score == 7 || score == 8){
-            return "The data shows that your app usage is more than usual indicating that you are moderately happy.";
+            return "The data shows that your app usage is more than usual indicating that you are quite happy.";
         }
         else if(score == 9 || score == 10){
-            return "The data shows that your app usage is quite a bit more than usual indicating that you are very happy.";
+            return "The data shows that your app usage is much more than usual indicating that you are very happy.";
         }
         else {
             throw new RuntimeException("INVALID SCORE");
