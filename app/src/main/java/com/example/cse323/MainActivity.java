@@ -57,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(!hasPermission()){
+            showToast();
+            finish();
+        }
+        Log.d("Resumed", "resumed");
+
+    }
     private void showToast(){
         Toast.makeText(getApplicationContext(), "Please enable 'Usage Access' permission in settings", Toast.LENGTH_LONG).show();
     }

@@ -2,11 +2,15 @@ package com.example.cse323;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AppOpsManager;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,6 +63,34 @@ public class DisplayActivity extends AppCompatActivity {
         }
         explanation.setText(explanation_text);
 
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(!hasPermission()){
+            showToast();
+            finish();
+        }
+        Log.d("Resumed", "resumed");
+
+    }
+    private void showToast(){
+        Toast.makeText(getApplicationContext(), "Please enable 'Usage Access' permission in settings", Toast.LENGTH_LONG).show();
+    }
+    private boolean hasPermission(){
+        boolean granted = false;
+        AppOpsManager appOps = (AppOpsManager) this.getApplicationContext()
+                .getSystemService(Context.APP_OPS_SERVICE);
+        assert appOps != null;
+        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(), this.getApplicationContext().getPackageName());
+
+        if (mode == AppOpsManager.MODE_DEFAULT) {
+            granted = (this.getApplicationContext().checkCallingOrSelfPermission(android.Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            granted = (mode == AppOpsManager.MODE_ALLOWED);
+        }
+        return granted;
     }
     private String getExplanationText(int score){
         if(score == 1 || score == 2){
