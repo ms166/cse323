@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,8 +53,12 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Log.d("permission", "false");
-            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+            showToast();
+            finish();
         }
+    }
+    private void showToast(){
+        Toast.makeText(getApplicationContext(), "Please enable 'Usage Access' permission in settings", Toast.LENGTH_LONG).show();
     }
     private boolean hasPermission(){
         boolean granted = false;
