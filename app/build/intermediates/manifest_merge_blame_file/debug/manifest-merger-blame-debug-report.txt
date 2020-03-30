@@ -15,7 +15,7 @@
 11-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:7:9-62
 12
 13    <application
-13-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:10:5-31:19
+13-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:10:5-35:19
 14        android:allowBackup="true"
 14-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:11:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -30,32 +30,39 @@
 20-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:14:9-54
 21        android:supportsRtl="true"
 21-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:15:9-35
-22        android:theme="@style/AppTheme" >
-22-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:16:9-40
-23        <activity android:name="com.example.cse323.DisplayActivity" >
-23-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:18:9-22:20
-23-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:18:19-50
-24            <meta-data
-24-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:19:13-21:67
-25                android:name="android.support.PARENT_ACTIVITY"
-25-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:20:17-63
-26                android:value="com.example.cse323.MainActivity" />
-26-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:21:17-64
-27        </activity>
-28        <activity android:name="com.example.cse323.MainActivity" >
-28-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:24:9-30:20
-28-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:24:19-47
-29            <intent-filter>
-29-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:25:13-29:29
-30                <action android:name="android.intent.action.MAIN" />
-30-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:17-69
-30-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:25-66
-31
-32                <category android:name="android.intent.category.LAUNCHER" />
-32-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:28:17-77
-32-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:28:27-74
-33            </intent-filter>
-34        </activity>
-35    </application>
+22        android:testOnly="true"
+23        android:theme="@style/AppTheme" >
+23-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:16:9-40
+24        <activity
+24-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:18:9-24:20
+25            android:name="com.example.cse323.DisplayActivity"
+25-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:18:19-50
+26            android:screenOrientation="portrait" >
+26-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:19:13-49
+27            <meta-data
+27-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:21:13-23:67
+28                android:name="android.support.PARENT_ACTIVITY"
+28-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:22:17-63
+29                android:value="com.example.cse323.MainActivity" />
+29-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:23:17-64
+30        </activity>
+31        <activity
+31-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:9-34:20
+32            android:name="com.example.cse323.MainActivity"
+32-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:19-47
+33            android:screenOrientation="portrait" >
+33-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:27:13-49
+34            <intent-filter>
+34-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:29:13-33:29
+35                <action android:name="android.intent.action.MAIN" />
+35-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:30:17-69
+35-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:30:25-66
 36
-37</manifest>
+37                <category android:name="android.intent.category.LAUNCHER" />
+37-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:32:17-77
+37-->/Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:32:27-74
+38            </intent-filter>
+39        </activity>
+40    </application>
+41
+42</manifest>

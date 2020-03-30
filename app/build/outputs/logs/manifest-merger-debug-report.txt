@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/f7fa931c10060cb31b4ececcd856b65d/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/75fe1a0d0ea641341446dfd6b8974e96/constraintlayout-1.1.3/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/e27002105a9bdd38fe216ef919b747b9/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -25,22 +25,22 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/mehransiddiqui/.gr
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/54ec9a60a0f20829d9c5323f1ce0908c/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/0571339fd4cb74441b19561f6766bb98/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/0f91f258f9d0abaa0e56c019df47bd85/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
+INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
 	package
 		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:4:5-33
 		INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
 		INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml
-		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-33:12
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:1-37:12
 		INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:2:11-69
@@ -51,7 +51,7 @@ ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main
 	android:name
 		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:7:9-62
 application
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:10:5-31:19
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:10:5-35:19
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/75fe1a0d0ea641341446dfd6b8974e96/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/75fe1a0d0ea641341446dfd6b8974e96/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
 MERGED from [androidx.core:core:1.1.0] /Users/mehransiddiqui/.gradle/caches/transforms-2/files-2.1/1cd7eff88f5e86d0249af2958bf465f0/core-1.1.0/AndroidManifest.xml:24:5-89
@@ -73,29 +73,37 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/mehr
 	android:theme
 		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:16:9-40
 activity#com.example.cse323.DisplayActivity
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:18:9-22:20
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:18:9-24:20
+	android:screenOrientation
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:19:13-49
+	tools:ignore
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:20:13-53
 	android:name
 		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:18:19-50
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:19:13-21:67
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:21:13-23:67
 	android:value
-		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:21:17-64
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:23:17-64
 	android:name
-		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:20:17-63
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:22:17-63
 activity#com.example.cse323.MainActivity
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:24:9-30:20
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:9-34:20
+	android:screenOrientation
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:27:13-49
+	tools:ignore
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:28:13-53
 	android:name
-		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:24:19-47
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:25:13-29:29
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:29:13-33:29
 action#android.intent.action.MAIN
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:17-69
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:30:17-69
 	android:name
-		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:26:25-66
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:30:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:28:17-77
+ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:32:17-77
 	android:name
-		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:28:27-74
+		ADDED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml:32:27-74
 uses-sdk
 INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/mehransiddiqui/Documents/working_directory/cse323/app/src/main/AndroidManifest.xml
