@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
             showToast();
             finish();
         }
-        Log.d("Resumed", "resumed");
 
     }
     private void showToast(){
@@ -203,16 +202,12 @@ public class MainActivity extends AppCompatActivity {
         UsageStatsManager mUsageStatsManager = (UsageStatsManager)getSystemService(Context.USAGE_STATS_SERVICE);
 
         assert mUsageStatsManager != null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         Calendar beginCal = Calendar.getInstance();
         beginCal.add(Calendar.DAY_OF_MONTH, -7 * start_week);
-//        Log.d("date_start", dateFormat.format(beginCal.getTime()));
 
         Calendar endCal = Calendar.getInstance();
         endCal.add(Calendar.DAY_OF_MONTH, -7 * end_week);
-//        Log.d("date_end", dateFormat.format(endCal.getTime()));
-//        Log.d("time_diff","" + (endCal.getTimeInMillis() - beginCal.getTimeInMillis()) / (double)(1000 * 3600));
 
         final Map<String, UsageStats> stats = mUsageStatsManager.queryAndAggregateUsageStats(beginCal.getTimeInMillis(), endCal.getTimeInMillis());
         return stats;
