@@ -38,10 +38,6 @@ public class DisplayActivity extends AppCompatActivity {
             assert(0 == 1);
             return;
         }
-        for(Row row: rows){
-            Log.d("_ENTRY_", "" + row);
-        }
-        Log.d("_ENTRY_", "" + sum);
         CustomListAdapter whatever = new CustomListAdapter(this, rows);
         listview = (ListView) findViewById(R.id.listviewID);
         listview.setAdapter(whatever);
