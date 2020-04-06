@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private final int START_WEEK_CUR = 1;
     private final int END_WEEK_CUR = 0;
 
+    private final Long total_week_minutes = 7L * 24 * 60;
     private Bundle bundle_for_display_activity;
 
     private Map<Long, String> stats_4_weeks;
@@ -147,25 +148,53 @@ public class MainActivity extends AppCompatActivity {
         score_text_view.setTextColor(Color.parseColor(this.colours[score - 1]));
 
     }
+    private Long findMax(Map<String, UsageStats> stats1, Map<String, UsageStats> stats2){
+        int time_delta_comp = START_WEEK_COMP - END_WEEK_COMP;
+        Long mx = Long.MIN_VALUE + 1;
+        assert(mx < 0);
+        for(Map.Entry<String, UsageStats> entry: stats1.entrySet()){
+            Long time = entry.getValue().getTotalTimeInForeground() / time_delta_comp;
+            time = toMinutes(time);
+            mx = Math.max(mx, time);
+        }
+
+        int time_delta_cur = START_WEEK_CUR - END_WEEK_CUR;
+        for(Map.Entry<String, UsageStats> entry : stats2.entrySet()){
+            Long time = entry.getValue().getTotalTimeInForeground() / time_delta_cur;
+            time = toMinutes(time);
+            mx = Math.max(mx, time);
+        }
+        return mx;
+    }
     private void assignStats(){
         final Map<String, UsageStats> stats1 = getStats(START_WEEK_COMP, END_WEEK_COMP);
+        final Map<String, UsageStats> stats2 = getStats(START_WEEK_CUR, END_WEEK_CUR);
+
+        Long maxTime = findMax(stats1, stats2);
+        double ratio = 1;
+        if(maxTime > total_week_minutes){
+            double exp = Math.log(total_week_minutes / (double) maxTime) / Math.log(0.875);
+            ratio = Math.pow(0.875, exp);
+        }
+
         this.stats_4_weeks = new TreeMap<Long, String>(Collections.<Long>reverseOrder());
         int time_delta_comp = START_WEEK_COMP - END_WEEK_COMP;
-        int time_delta_cur = START_WEEK_CUR - END_WEEK_CUR;
-//        Log.d("time_delta", "" + time_delta_comp);
-//        Log.d("time_delta", "" + time_delta_cur);
+
         for(Map.Entry<String, UsageStats> entry: stats1.entrySet()){
             // divided by 4 to get average time per week
             Long time = entry.getValue().getTotalTimeInForeground() / time_delta_comp;
-            time = fixTime(time);
+            time = toMinutes(time);
+            time = (long)(time.doubleValue() * ratio);
             this.stats_4_weeks.put(time, entry.getKey());
         }
 
-        final Map<String, UsageStats> stats2 = getStats(START_WEEK_CUR, END_WEEK_CUR);
         this.stats_cur_week = new HashMap<String, Long>();
+        int time_delta_cur = START_WEEK_CUR - END_WEEK_CUR;
+
         for(Map.Entry<String, UsageStats> entry : stats2.entrySet()){
             Long time = entry.getValue().getTotalTimeInForeground() / time_delta_cur;
-            time = fixTime(time);
+            time = toMinutes(time);
+            time = (long)(time.doubleValue() * ratio);
             this.stats_cur_week.put(entry.getKey(), time) ;
         }
     }
@@ -185,8 +214,7 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("date_end", dateFormat.format(endCal.getTime()));
 //        Log.d("time_diff","" + (endCal.getTimeInMillis() - beginCal.getTimeInMillis()) / (double)(1000 * 3600));
 
-        Long time_delta = 1000L * 3600 * 10;
-        final Map<String, UsageStats> stats = mUsageStatsManager.queryAndAggregateUsageStats(beginCal.getTimeInMillis() + time_delta, endCal.getTimeInMillis());
+        final Map<String, UsageStats> stats = mUsageStatsManager.queryAndAggregateUsageStats(beginCal.getTimeInMillis(), endCal.getTimeInMillis());
         return stats;
     }
 
@@ -195,12 +223,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtras(this.bundle_for_display_activity);
         startActivity(intent);
     }
-    private Long fixTime(Long time){
-        time /= (1000 * 60);
-        while (time >= (24L * 7 * 60)) {
-            time /= 8;
-            time *= 7;
-        }
-        return time;
+    private Long toMinutes(Long time){
+        return time / (1000 * 60);
     }
 }

@@ -22,7 +22,7 @@ public class DisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        // adds back button to go back to parent activit
+        // adds back button to go back to parent activity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle = this.getIntent().getExtras();
@@ -71,7 +71,6 @@ public class DisplayActivity extends AppCompatActivity {
             showToast();
             finish();
         }
-        Log.d("Resumed", "resumed");
 
     }
     private void showToast(){
