@@ -3,3 +3,4 @@
 ## Installation
 * Either download the [apk](https://github.com/ms166/cse323/releases) file to your device and install
 * Or install using Android Studio.
+* After installation, provide the `usage access` permission to this app in `settings`.
