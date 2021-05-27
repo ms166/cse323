@@ -1,4 +1,4 @@
-package com.example.cse323;
+package com.example.app;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.cse323", appContext.getPackageName());
+        assertEquals("com.example.app", appContext.getPackageName());
     }
 }

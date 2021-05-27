@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.cse323">
+    package="com.example.app">
 
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
@@ -15,15 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".DisplayActivity"
+        <activity android:name="com.example.app.DisplayActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.cse323.MainActivity" />
+                android:value="com.example.app.MainActivity" />
         </activity>
 
-        <activity android:name=".MainActivity"
+        <activity android:name="com.example.app.MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" >
             <intent-filter>

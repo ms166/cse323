@@ -1,4 +1,4 @@
-package com.example.cse323;
+package com.example.app;
 
 import android.app.Activity;
 import android.graphics.Color;

@@ -1,6 +1,4 @@
-package com.example.cse323;
-
-import android.util.Log;
+package com.example.app;
 
 import java.io.Serializable;
 

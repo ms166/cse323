@@ -1,2 +1,2 @@
-rootProject.name='cse323'
+rootProject.name='app'
 include ':app'
